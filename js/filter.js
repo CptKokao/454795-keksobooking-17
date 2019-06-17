@@ -1,3 +1,5 @@
+'use strict';
+
 (function () {
 
   var mapFilters = document.querySelector('.map__filters');
@@ -10,12 +12,12 @@
   var filter = function () {
 
     window.map.removePopup();
-    filteredData = window.data.data.slice();
-    filteredData = filteredData.filter(function(it) {
+    var filteredData = window.data.data.slice();
+    filteredData = filteredData.filter(function (it) {
       return (filterTypes(it) && filterRooms(it) && filterCost(it) && filterGuests(it) && filterFeatures(it));
     });
     window.map.renderPins(filteredData);
-  }
+  };
 
   mapFilters.addEventListener('change', filter);
 
@@ -26,7 +28,7 @@
     var count = 0;
 
 
-    checkboxInputs.forEach(function(el) {
+    checkboxInputs.forEach(function (el) {
       // если false, то фильр выкл. и искать совпадение в item НЕ нужно
       if (el.checked === false) {
         return true;
@@ -84,9 +86,9 @@
     } else if (filterPriceSelect.value === 'low') {
       return (item.offer.price < 10000);
     } else if (filterPriceSelect.value === 'middle') {
-      return (10000 <= item.offer.price && item.offer.price < 50000);
+      return (item.offer.price >= 10000 && item.offer.price < 50000);
     } else if (filterPriceSelect.value === 'high') {
-      return (50000 <= item.offer.price);
+      return (item.offer.price >= 50000);
     }
   };
 })();

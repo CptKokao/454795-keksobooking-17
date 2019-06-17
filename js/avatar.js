@@ -13,7 +13,7 @@
     var fileName = file.name.toLowerCase();
 
     var matches = FILE_TYPES.some(function (it) {
-     return fileName.endsWith(it);
+      return fileName.endsWith(it);
     });
 
     if (matches) {
@@ -32,14 +32,14 @@
     var fileName = file.name.toLowerCase();
 
     var matches = FILE_TYPES.some(function (it) {
-     return fileName.endsWith(it);
+      return fileName.endsWith(it);
     });
 
     if (matches) {
       var reader = new FileReader();
 
       reader.addEventListener('load', function () {
-        var img = document.createElement("img");
+        var img = document.createElement('img');
         previewHousing.appendChild(img);
         img.style.width = '70px';
         img.style.height = '70px';

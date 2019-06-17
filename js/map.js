@@ -11,7 +11,7 @@
 
 
   // Открывает карту и отображает пины
-  var onMapPinMainClick = function(evt) {
+  var onMapPinMainClick = function () {
     map.classList.remove('map--faded');
     renderPins(window.data.data);
     removeDisableForm();
@@ -42,7 +42,7 @@
       if (popup) {
         map.removeChild(popup);
       }
-      card.createAds(arrPin);
+      window.card.createAds(arrPin);
       removeActive();
       addActive(templateButton);
 
@@ -123,11 +123,11 @@
   mapPinMain.addEventListener('mouseup', onMapPinMainClick);
 
   window.map = {
-     mapPinMain: mapPinMain,
-     map: map,
-     renderPins: renderPins,
-     removePopup: removePopup
-   };
+    mapPinMain: mapPinMain,
+    map: map,
+    renderPins: renderPins,
+    removePopup: removePopup
+  };
 })();
 
 

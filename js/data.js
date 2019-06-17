@@ -6,6 +6,6 @@
 
   window.data = {
     data: data
-   };
+  };
 })();
 
