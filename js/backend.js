@@ -15,7 +15,7 @@
         // если код 200, запустить ф-ю onSuccess с параметром xhr.response (полученные данные)
         case 200:
           window.data.data = xhr.response;
-          console.log(window.data.data);
+          // console.log(window.data.data);
           onSuccess(xhr.response);
           break;
         case 400:

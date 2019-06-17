@@ -10,7 +10,7 @@
   var filter = function () {
 
     window.map.removePopup();
-    filteredData = window.data.randomAds.slice();
+    filteredData = window.data.data.slice();
     filteredData = filteredData.filter(function(it) {
       return (filterTypes(it) && filterRooms(it) && filterCost(it) && filterGuests(it) && filterFeatures(it));
     });
