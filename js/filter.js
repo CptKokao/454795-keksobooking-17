@@ -32,9 +32,7 @@
       // если false, то фильр выкл. и искать совпадение в item НЕ нужно
       if (el.checked === false) {
         return true;
-      }
-      // если true, то фильтр вкл. искать совпадение в item НУЖНО
-      if (el.checked === true) {
+      } else { // если true, то фильтр вкл. искать совпадение в item НУЖНО
         featuresCheck.push(el.value);
         // Надо пройтись по объекту в свойстве features, key количество раз и сравнить с el.value, если есть совпалдение прибавить count++
         for (var key in item.offer.features) {
@@ -43,6 +41,7 @@
           }
         }
       }
+      return count;
     });
     // Предполагается, что если выбрано 3 фильтра checkboxInputs.value('wifi', 'parking', 'dishwasher') и item имеет все эти значения, то count === featuresCheck.length
     if (count === featuresCheck.length) {
@@ -89,6 +88,8 @@
       return (item.offer.price >= 10000 && item.offer.price < 50000);
     } else if (filterPriceSelect.value === 'high') {
       return (item.offer.price >= 50000);
+    } else {
+      return false;
     }
   };
 })();
