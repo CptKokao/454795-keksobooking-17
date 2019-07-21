@@ -20,6 +20,11 @@
     }
   };
 
+  var defaultCoords = {
+    x: window.map.offsetLeft,
+    y: window.map.offsetTop,
+  };
+
   // Запускается когда произошел событие mousedown наwindow.map.mapPinMain
   window.map.mapPinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
@@ -76,6 +81,15 @@
     document.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   });
+
+  var setPinMainDefaultCoords = function () {
+    window.map.mapPinMain.style.top = defaultCoords.y + 'px';
+    window.map.mapPinMain.style.left = defaultCoords.x + 'px';
+  };
+
+  window.move = {
+    setPinMainDefaultCoords: setPinMainDefaultCoords
+  }
 })();
 
 

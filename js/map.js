@@ -5,7 +5,8 @@
   var mapPins = document.querySelector('.map__pins');
   var mapPinMain = document.querySelector('.map__pin--main');
   var noticeForm = document.querySelector('.ad-form');
-  var fieldset = noticeForm.querySelectorAll('.ad-form__element');
+  var ALL_INPUTS = noticeForm.querySelectorAll('input');
+  var ALL_SELECTS = noticeForm.querySelectorAll('select');
   var ESC_KEY_CODE = 27;
   var ENTER_KEY_CODE = 13;
 
@@ -14,19 +15,39 @@
   var onMapPinMainClick = function () {
     map.classList.remove('map--faded');
     renderPins(window.data.data);
-    removeDisableForm();
+    openForm();
 
     // Удаляет событие onMapPinMainClick, т.к. повторно оно не нужно
     mapPinMain.removeEventListener('mouseup', onMapPinMainClick);
   };
 
   // Удаляет у form класс notice__form--disabled и у fieldset атрибут disabled
-  var removeDisableForm = function () {
-    for (var i = 0; i < fieldset.length; i++) {
-      fieldset[i].removeAttribute('disabled');
+  var removeDisable = function (arr) {
+    for (var i = 0; i < arr.length; i++) {
+      arr[i].disabled = false;
     }
-    noticeForm.classList.remove('ad-form--disabled');
   };
+
+  var addDisable = function (arr) {
+    for (var i = 0; i < arr.length; i++) {
+      arr[i].disabled = true;
+    }
+  };
+
+  var openForm = function () {
+    removeDisable(ALL_INPUTS);
+    removeDisable(ALL_SELECTS);
+    noticeForm.classList.remove('ad-form--disabled');
+  }
+
+  var closeForm = function () {
+    addDisable(ALL_INPUTS);
+    addDisable(ALL_SELECTS);
+    noticeForm.classList.add('ad-form--disabled');
+    map.classList.add('map--faded');
+  }
+
+  closeForm();
 
   // Создает пины на карте
   var createPin = function (arrPin) {
@@ -66,6 +87,7 @@
   // Отборажает пины на карте
   var renderPins = function (arrPins) {
     var fragment = document.createDocumentFragment();
+    console.log(arrPins);
     arrPins.forEach(function (it) {
       fragment.appendChild(createPin(it));
     });
@@ -126,7 +148,10 @@
     mapPinMain: mapPinMain,
     map: map,
     renderPins: renderPins,
-    removePopup: removePopup
+    removePopup: removePopup,
+    removePins: removePins,
+    closeForm: closeForm,
+    onMapPinMainClick: onMapPinMainClick
   };
 })();
 
