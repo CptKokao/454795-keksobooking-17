@@ -23,7 +23,6 @@
 
   form.addEventListener('submit', function(evt) {
     evt.preventDefault();
-    // var formData = new FormData(form);
     window.backend.upload(new FormData(form), window.getMessage.onLoad, window.getMessage.onError);
     form.reset();
     window.map.removePins();
