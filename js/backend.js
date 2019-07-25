@@ -1,12 +1,10 @@
 'use strict';
 
 (function () {
+  window.data;
   var form = document.querySelector('.ad-form');
-  var ERROR_MESSAGE_TEMPLATE = document.querySelector('#error').content.querySelector('.error');
-  var SUCCESS_MESSAGE_TEMPLATE = document.querySelector('#success').content.querySelector('.success');
-  var ESC_KEY_CODE = 27; //!! повтор
 
-  // Запрос происходит асинхронно, поэтому чтобы дождаться ответа сервера, нужно повесить специальный обработчик события load, который сработает тогда, когда сервер вернёт ответ
+  // запрос происходит асинхронно, поэтому чтобы дождаться ответа сервера, нужно повесить специальный обработчик события load, который сработает тогда, когда сервер вернёт ответ
   var setup = function (onSuccess, onError) {
 
     var xhr = new XMLHttpRequest();
@@ -18,14 +16,14 @@
       var error;
       switch (xhr.status) {
         case 200:
-          // записывает полученные данные
-          window.data.data = xhr.response;
           // если upload
           if (xhr.responseURL == 'https://js.dump.academy/keksobooking') {
-            renderSuccessMessage();
+            window.message.renderSuccessMessage();
           }
           // если download
           if (xhr.responseURL == 'https://js.dump.academy/keksobooking/data') {
+            // записывает полученные данные
+            window.data = xhr.response;
             onSuccess(xhr.response);
           }
           break;
@@ -62,64 +60,27 @@
     return xhr;
   };
 
-  // отображает страницу с 'Ошибкой'
-  window.backend = {
-    // Функция получения данных с сервера
-    download: function (onLoad, onError) {
-      var xhr = setup(onLoad, onError);
+  // получение данных с сервера
+  var download = function (onLoad, onError) {
+    var xhr = setup(onLoad, onError);
 
-      xhr.open('GET', 'https://js.dump.academy/keksobooking/data');
-      xhr.send();
-    },
-
-    // Функция для отправки данных на сервер
-    upload: function (data, onLoad, onError) {
-      var xhr = setup(onLoad, onError);
-
-      xhr.open('POST', 'https://js.dump.academy/keksobooking');
-      xhr.send(data);
-
-    }
+    xhr.open('GET', 'https://js.dump.academy/keksobooking/data');
+    xhr.send();
   };
 
-  // отображает страницу с 'Успешной отправкой'
-  var renderSuccessMessage = function () {
-    var node = SUCCESS_MESSAGE_TEMPLATE.cloneNode(true);
-    document.querySelector('main').appendChild(node);
-    var successElement = document.querySelector('main .success');
-    // Добавление обработчиков, закрывающийх объявление
-    document.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === ESC_KEY_CODE) {
-        successElement.remove();
-      }
-    });
-    document.addEventListener('click', function () {
-      successElement.remove();
-    });
+  // отправка данных на сервер
+  var upload = function (data, onLoad, onError) {
+    var xhr = setup(onLoad, onError);
+
+    xhr.open('POST', 'https://js.dump.academy/keksobooking');
+    xhr.send(data);
   };
 
-  // отображает страницу с 'Ошибкой'
-  var renderErrorMessage = function () {
-    var node = ERROR_MESSAGE_TEMPLATE.cloneNode(true);
-    document.querySelector('main').appendChild(node);
-    var errorElement = document.querySelector('main .error');
-    var errorBtn = document.querySelector('.error__button');
-
-    // Добавление обработчиков, закрывающийх объявление
-    document.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === ESC_KEY_CODE) {
-        errorElement.remove();
-      }
-    });
-    errorBtn.addEventListener('click', function () {
-      errorElement.remove();
-    });
-  };
-
+  // отправка формы
   form.addEventListener('submit', function(evt) {
     evt.preventDefault();
     // загружает данные на сервер
-    window.backend.upload(new FormData(form), renderSuccessMessage, renderErrorMessage);
+    upload(new FormData(form), window.message.renderSuccessMessage, window.message.renderErrorMessage);
     console.log(evt.type);
     // очищает форму
     form.reset();
@@ -128,12 +89,14 @@
     // затемняет и блокирует форму
     window.map.closeForm();
     // выставляет начальные координаты основному пину
-    window.move.setPinMainDefaultCoords();
+    window.move.setDefaultCoords();
     // удаляет попап
     window.map.removePopup();
     // загружает данные с сервера
-    window.backend.download(window.getMessage.onLoad, window.getMessage.onError);
+    download(window.download.onError, window.download.onLoad);
     // Обработчик открывает карту и отображает пины
     window.map.mapPinMain.addEventListener('mouseup', window.map.onMapPinMainClick);
   });
+
+  download(window.download.onLoad, window.download.onError);
 })();
