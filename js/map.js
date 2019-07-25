@@ -88,9 +88,10 @@
   var renderPins = function (arrPins) {
     var fragment = document.createDocumentFragment();
     console.log(arrPins);
-    arrPins.forEach(function (it) {
-      fragment.appendChild(createPin(it));
-    });
+    arrPins.splice(5);
+    for(var i = 0; i < arrPins.length; i++) {
+      fragment.appendChild(createPin(arrPins[i]))
+    }
     removePins();
     mapPins.appendChild(fragment);
   };

@@ -11,7 +11,7 @@
 
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
-    xhr.timeout = 3000; // 10s
+    xhr.timeout = 3000;
 
     xhr.addEventListener('load', function () {
       console.log(xhr)
@@ -62,6 +62,7 @@
     return xhr;
   };
 
+  // отображает страницу с 'Ошибкой'
   window.backend = {
     // Функция получения данных с сервера
     download: function (onLoad, onError) {
@@ -110,17 +111,15 @@
         errorElement.remove();
       }
     });
-    document.addEventListener('click', function () {
-      errorBtn.remove();
+    errorBtn.addEventListener('click', function () {
+      errorElement.remove();
     });
   };
-
-
 
   form.addEventListener('submit', function(evt) {
     evt.preventDefault();
     // загружает данные на сервер
-    window.backend.upload(new FormData(form), window.getMessage.onLoad, window.getMessage.onError);
+    window.backend.upload(new FormData(form), renderSuccessMessage, renderErrorMessage);
     console.log(evt.type);
     // очищает форму
     form.reset();
@@ -130,11 +129,11 @@
     window.map.closeForm();
     // выставляет начальные координаты основному пину
     window.move.setPinMainDefaultCoords();
+    // удаляет попап
+    window.map.removePopup();
     // загружает данные с сервера
     window.backend.download(window.getMessage.onLoad, window.getMessage.onError);
     // Обработчик открывает карту и отображает пины
     window.map.mapPinMain.addEventListener('mouseup', window.map.onMapPinMainClick);
   });
-
-
 })();
