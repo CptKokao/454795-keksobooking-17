@@ -5,5 +5,5 @@
   window.keyCode = {
     esc: 27,
     enter: 13
-  }
+  };
 })();

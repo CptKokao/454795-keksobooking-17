@@ -90,7 +90,7 @@
 
   window.move = {
     setDefaultCoords: setDefaultCoords
-  }
+  };
 })();
 
 

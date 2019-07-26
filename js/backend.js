@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  window.data;
+  var data;
   var form = document.querySelector('.ad-form');
 
   // запрос происходит асинхронно, поэтому чтобы дождаться ответа сервера, нужно повесить специальный обработчик события load, который сработает тогда, когда сервер вернёт ответ
@@ -12,18 +12,17 @@
     xhr.timeout = 3000;
 
     xhr.addEventListener('load', function () {
-      console.log(xhr)
       var error;
       switch (xhr.status) {
         case 200:
           // если upload
-          if (xhr.responseURL == 'https://js.dump.academy/keksobooking') {
+          if (xhr.responseURL === 'https://js.dump.academy/keksobooking') {
             window.message.renderSuccessMessage();
           }
           // если download
-          if (xhr.responseURL == 'https://js.dump.academy/keksobooking/data') {
+          if (xhr.responseURL === 'https://js.dump.academy/keksobooking/data') {
             // записывает полученные данные
-            window.data = xhr.response;
+            data = xhr.response;
             onSuccess(xhr.response);
           }
           break;
@@ -69,19 +68,18 @@
   };
 
   // отправка данных на сервер
-  var upload = function (data, onLoad, onError) {
+  var upload = function (downloadData, onLoad, onError) {
     var xhr = setup(onLoad, onError);
 
     xhr.open('POST', 'https://js.dump.academy/keksobooking');
-    xhr.send(data);
+    xhr.send(downloadData);
   };
 
   // отправка формы
-  form.addEventListener('submit', function(evt) {
+  form.addEventListener('submit', function (evt) {
     evt.preventDefault();
     // загружает данные на сервер
     upload(new FormData(form), window.message.renderSuccessMessage, window.message.renderErrorMessage);
-    console.log(evt.type);
     // очищает форму
     form.reset();
     // удаляет пины
@@ -93,10 +91,14 @@
     // удаляет попап
     window.map.removePopup();
     // загружает данные с сервера
-    download(window.download.onError, window.download.onLoad);
+    download(window.download.onLoad, window.download.onError);
     // Обработчик открывает карту и отображает пины
     window.map.mapPinMain.addEventListener('mouseup', window.map.onMapPinMainClick);
   });
 
   download(window.download.onLoad, window.download.onError);
+
+  window.backend = {
+    data: data
+  };
 })();

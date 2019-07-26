@@ -12,7 +12,7 @@
 
     // закрывает объявление по ESC
     document.addEventListener('keydown', function (evt) {
-      if (evt.keyCode === ESC_KEY_CODE) {
+      if (evt.keyCode === window.keyCode.esc) {
         successElement.remove();
       }
     });

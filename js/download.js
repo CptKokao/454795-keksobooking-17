@@ -4,7 +4,7 @@
   var textMessage = document.querySelector('#textMessage');
 
   // сообщение если данные загрузились
-  var onError = function () {
+  var onError = function (message) {
     textMessage.classList.remove('visually-hidden');
     textMessage.style.backgroundColor = '#f24c4c';
     textMessage.innerHTML = 'Ошибка: ' + message + ' | Данные не загружены';
@@ -25,5 +25,5 @@
   window.download = {
     onError: onError,
     onLoad: onLoad
-  }
+  };
 })();

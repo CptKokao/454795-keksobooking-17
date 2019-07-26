@@ -12,7 +12,7 @@
   // открывает карту и отображает пины
   var onMapPinMainClick = function () {
     map.classList.remove('map--faded');
-    renderPins(window.data);
+    renderPins(window.backend.data);
     openForm();
 
     // удаляет событие onMapPinMainClick, т.к. повторно оно не нужно
@@ -36,14 +36,14 @@
     removeDisable(allInputs);
     removeDisable(allSelector);
     noticeForm.classList.remove('ad-form--disabled');
-  }
+  };
 
   var closeForm = function () {
     addDisable(allInputs);
     addDisable(allSelector);
     noticeForm.classList.add('ad-form--disabled');
     map.classList.add('map--faded');
-  }
+  };
 
   closeForm();
 
@@ -85,10 +85,9 @@
   // отборажает пины на карте
   var renderPins = function (arrPins) {
     var fragment = document.createDocumentFragment();
-    console.log(arrPins);
     arrPins.splice(5);
-    for(var i = 0; i < arrPins.length; i++) {
-      fragment.appendChild(createPin(arrPins[i]))
+    for (var i = 0; i < arrPins.length; i++) {
+      fragment.appendChild(createPin(arrPins[i]));
     }
     removePins();
     mapPins.appendChild(fragment);
