@@ -4,7 +4,7 @@
 
   var mapFiltersContainer = document.querySelector('.map__filters-container');
 
-  // Возвращает разметку .features
+  // возвращает разметку .features
   var getFeatures = function (features) {
     var feature = '';
     for (var i = 0; i < features.length; i++) {
@@ -13,7 +13,7 @@
     return feature;
   };
 
-  // Создает подробную информацию объявления
+  // создает подробную информацию объявления
   window.card.createAds = function (arrPin) {
     var templateArticale = document.querySelector('#card').content.querySelector('.map__card').cloneNode(true);
 

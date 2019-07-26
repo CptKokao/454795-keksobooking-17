@@ -9,7 +9,7 @@
   var roomNumber = document.querySelector('#room_number');
   var capacity = document.querySelector('#capacity');
 
-  // Поля «время заезда» и «время выезда» синхронизированы
+  // «время заезда» и «время выезда» синхронизированы
   timeIn.addEventListener('change', function () {
     switch (timeIn.value) {
       case '12:00':
@@ -24,7 +24,7 @@
     }
   });
 
-  // Поля «время выезда» и «время заезда» синхронизированы
+  // «время выезда» и «время заезда» синхронизированы
   timeOut.addEventListener('change', function () {
     switch (timeOut.value) {
       case '12:00':
@@ -39,7 +39,7 @@
     }
   });
 
-  // «Тип жилья» синхронизировано с минимальной ценой и placeholder
+  // «тип жилья» синхронизировано с минимальной ценой и placeholder
   type.addEventListener('change', function () {
     switch (type.value) {
       case 'flat':
@@ -61,7 +61,7 @@
     }
   });
 
-  // Количество комнат синхронизировано с количеством гостей
+  // количество комнат синхронизировано с количеством гостей
   roomNumber.addEventListener('change', function () {
     switch (roomNumber.value) {
       case '1':

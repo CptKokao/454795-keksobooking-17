@@ -12,7 +12,7 @@
   var filter = function () {
 
     window.map.removePopup();
-    var filteredData = window.data.data.slice();
+    var filteredData = window.data.slice();
     filteredData = filteredData.filter(function (it) {
       return (filterTypes(it) && filterRooms(it) && filterCost(it) && filterGuests(it) && filterFeatures(it));
     });
@@ -34,7 +34,7 @@
         return true;
       } else { // если true, то фильтр вкл. искать совпадение в item НУЖНО
         featuresCheck.push(el.value);
-        // Надо пройтись по объекту в свойстве features, key количество раз и сравнить с el.value, если есть совпалдение прибавить count++
+        // надо пройтись по объекту в свойстве features, key количество раз и сравнить с el.value, если есть совпалдение прибавить count++
         for (var key in item.offer.features) {
           if (item.offer.features[key] === el.value) {
             count++;
@@ -43,7 +43,7 @@
       }
       return count;
     });
-    // Предполагается, что если выбрано 3 фильтра checkboxInputs.value('wifi', 'parking', 'dishwasher') и item имеет все эти значения, то count === featuresCheck.length
+    // предполагается, что если выбрано 3 фильтра checkboxInputs.value('wifi', 'parking', 'dishwasher') и item имеет все эти значения, то count === featuresCheck.length
     if (count === featuresCheck.length) {
       return true;
     } else {
@@ -51,7 +51,7 @@
     }
   };
 
-  // Фильтр тип жилья
+  // фильтр тип жилья
   var filterTypes = function (item) {
     if (filterTypeSelect.value === 'any') {
       return true;
@@ -60,7 +60,7 @@
     }
   };
 
-  // Фильтр число комнат
+  // фильтр число комнат
   var filterRooms = function (item) {
     if (filterRoomsSelect.value === 'any') {
       return true;
@@ -69,7 +69,7 @@
     }
   };
 
-  // Фильтр число гостей
+  // фильтр число гостей
   var filterGuests = function (item) {
     if (filterGuestsSelect.value === 'any') {
       return true;
@@ -78,7 +78,7 @@
     }
   };
 
-  // Фильтр стоимости
+  // фильтр стоимости
   var filterCost = function (item) {
     if (filterPriceSelect.value === 'any') {
       return true;
