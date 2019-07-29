@@ -12,7 +12,7 @@
   var filter = function () {
 
     window.map.removePopup();
-    var filteredData = window.data.slice();
+    var filteredData = window.backend.data.slice();
     filteredData = filteredData.filter(function (it) {
       return (filterTypes(it) && filterRooms(it) && filterCost(it) && filterGuests(it) && filterFeatures(it));
     });
