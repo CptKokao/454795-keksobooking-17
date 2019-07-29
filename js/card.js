@@ -4,13 +4,22 @@
 
   var mapFiltersContainer = document.querySelector('.map__filters-container');
 
-  // возвращает разметку .features
+  // возвращает features
   var getFeatures = function (features) {
     var feature = '';
     for (var i = 0; i < features.length; i++) {
       feature += '<li class="popup__feature popup__feature--' + features[i] + '"></li>';
     }
     return feature;
+  };
+
+  // возвращает photo
+  var getPhotos = function (photos) {
+    var photo = '';
+    for (var i = 0; i < photos.length; i++) {
+      photo += '<img src="' + photos[i] + '" class="popup__photo" width="45" height="40" alt="Фотография жилья"></img>';
+    }
+    return photo;
   };
 
   // создает подробную информацию объявления
@@ -25,7 +34,7 @@
     templateArticale.querySelector('.popup__text--time').textContent = 'Заезд после ' + arrPin.offer.checkin + ', выезд до ' + arrPin.offer.checkout;
     templateArticale.querySelector('.popup__features').innerHTML = getFeatures(arrPin.offer.features);
     templateArticale.querySelector('.popup__description').textContent = arrPin.offer.description;
-    templateArticale.querySelector('.popup__photos img').src = arrPin.offer.photos;
+    templateArticale.querySelector('.popup__photos').innerHTML = getPhotos(arrPin.offer.photos);
     templateArticale.querySelector('.popup__avatar').src = arrPin.author.avatar;
 
     window.map.map.insertBefore(templateArticale, mapFiltersContainer);
