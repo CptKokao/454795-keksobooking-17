@@ -25,7 +25,7 @@
     y: window.map.offsetTop,
   };
 
-  // запускается когда произошел событие mousedown на window.map.mapPinMain
+  // запускается когда произошел событие mousedown на mapPinMain
   window.map.mapPinMain.addEventListener('mousedown', function (evt) {
     evt.preventDefault();
 
