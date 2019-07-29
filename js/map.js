@@ -12,8 +12,7 @@
   // открывает карту и отображает пины
   var onMapPinMainClick = function () {
     map.classList.remove('map--faded');
-    console.log(window.data);
-    renderPins(window.data);
+    renderPins(window.backend.data);
     openForm();
 
     // удаляет событие onMapPinMainClick, т.к. повторно оно не нужно
