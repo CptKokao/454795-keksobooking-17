@@ -1,7 +1,7 @@
 'use strict';
 
 (function () {
-  window.data;
+  var data;
   var form = document.querySelector('.ad-form');
 
   // запрос происходит асинхронно, поэтому чтобы дождаться ответа сервера, нужно повесить специальный обработчик события load, который сработает тогда, когда сервер вернёт ответ
@@ -22,7 +22,7 @@
           // если download
           if (xhr.responseURL === 'https://js.dump.academy/keksobooking/data') {
             // записывает полученные данные
-            window.data = xhr.response;
+            window.backend.data = xhr.response;
             onSuccess(xhr.response);
           }
           break;
@@ -98,4 +98,7 @@
 
   download(window.download.onLoad, window.download.onError);
 
+  window.backend = {
+    data: data
+  };
 })();
