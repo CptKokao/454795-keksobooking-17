@@ -2,7 +2,6 @@
 
 (function () {
   var data;
-  var form = document.querySelector('.ad-form');
   var HTTP_OK = 200;
   var HTTP_BAD_REGUEST = 400;
   var HTTP_UNAUTHORIZED = 401;
@@ -82,12 +81,12 @@
   };
 
   // отправка формы
-  form.addEventListener('submit', function (evt) {
+  window.form.adForm.addEventListener('submit', function (evt) {
     evt.preventDefault();
     // загружает данные на сервер
-    upload(new FormData(form), window.message.renderSuccessMessage, window.message.renderErrorMessage);
+    upload(new FormData(window.form.adForm), window.message.renderSuccessMessage, window.message.renderErrorMessage);
     // очищает форму
-    form.reset();
+    window.form.adForm.reset();
     // удаляет пины
     window.map.removePins();
     // затемняет и блокирует форму

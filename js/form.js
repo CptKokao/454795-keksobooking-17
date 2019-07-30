@@ -8,6 +8,7 @@
   var price = document.querySelector('#price');
   var roomNumber = document.querySelector('#room_number');
   var capacity = document.querySelector('#capacity');
+  var adForm = document.querySelector('.ad-form');
   var formReset = document.querySelector('.ad-form__reset');
 
   // «время заезда» и «время выезда» синхронизированы
@@ -83,6 +84,8 @@
   // отправка формы
   formReset.addEventListener('click', function (evt) {
     evt.preventDefault();
+    // очищает форму
+    window.form.adForm.reset();
     // удаляет пины
     window.map.removePins();
     // затемняет и блокирует форму
@@ -94,5 +97,9 @@
     // загружает данные с сервера
     window.map.mapPinMain.addEventListener('mouseup', window.map.onMapPinMainClick);
   });
+
+  window.form = {
+    adForm: adForm
+  };
 })();
 
