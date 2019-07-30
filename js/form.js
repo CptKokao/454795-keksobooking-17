@@ -80,19 +80,19 @@
     }
   });
 
-    // отправка формы
-    formReset.addEventListener('click', function (evt) {
-      evt.preventDefault();
-      // удаляет пины
-      window.map.removePins();
-      // затемняет и блокирует форму
-      window.map.closeForm();
-      // выставляет начальные координаты основному пину
-      window.move.setDefaultCoords();
-      // удаляет попап
-      window.map.removePopup();
-      // загружает данные с сервера
-      window.map.mapPinMain.addEventListener('mouseup', window.map.onMapPinMainClick);
-    });
+  // отправка формы
+  formReset.addEventListener('click', function (evt) {
+    evt.preventDefault();
+    // удаляет пины
+    window.map.removePins();
+    // затемняет и блокирует форму
+    window.map.closeForm();
+    // выставляет начальные координаты основному пину
+    window.move.setDefaultCoords();
+    // удаляет попап
+    window.map.removePopup();
+    // загружает данные с сервера
+    window.map.mapPinMain.addEventListener('mouseup', window.map.onMapPinMainClick);
+  });
 })();
 
