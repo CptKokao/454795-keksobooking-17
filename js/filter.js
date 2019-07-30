@@ -44,11 +44,7 @@
       return count;
     });
     // предполагается, что если выбрано 3 фильтра checkboxInputs.value('wifi', 'parking', 'dishwasher') и item имеет все эти значения, то count === featuresCheck.length
-    if (count === featuresCheck.length) {
-      return true;
-    } else {
-      return false;
-    }
+    return count === featuresCheck.length;
   };
 
   // фильтр тип жилья
