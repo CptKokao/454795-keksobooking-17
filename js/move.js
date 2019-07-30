@@ -21,8 +21,8 @@
   };
 
   var DEFAULT_COORDS = {
-    x: window.map.offsetLeft,
-    y: window.map.offsetTop,
+    x: 603 - PIN_SIZE.width / 2,
+    y: 440 - PIN_SIZE.width,
   };
 
   // запускается когда произошел событие mousedown на mapPinMain
@@ -86,6 +86,8 @@
   var setDefaultCoords = function () {
     window.map.mapPinMain.style.top = DEFAULT_COORDS.y + 'px';
     window.map.mapPinMain.style.left = DEFAULT_COORDS.x + 'px';
+    inputAddress.value = (DEFAULT_COORDS.x + PIN_SIZE.width / 2) + '; ' + (DEFAULT_COORDS.y + PIN_SIZE.height);
+
   };
 
   window.move = {
