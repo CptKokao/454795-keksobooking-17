@@ -3,6 +3,12 @@
 (function () {
   var data;
   var form = document.querySelector('.ad-form');
+  var HTTP_OK = 200;
+  var HTTP_BAD_REGUEST = 400;
+  var HTTP_UNAUTHORIZED = 401;
+  var HTTP_NOT_FOUND = 404;
+  var HTTP_INTERNAL_ERROR = 500;
+
 
   // запрос происходит асинхронно, поэтому чтобы дождаться ответа сервера, нужно повесить специальный обработчик события load, который сработает тогда, когда сервер вернёт ответ
   var setup = function (onSuccess, onError) {
@@ -14,7 +20,7 @@
     xhr.addEventListener('load', function () {
       var error;
       switch (xhr.status) {
-        case 200:
+        case HTTP_OK:
           // если upload
           if (xhr.responseURL === 'https://js.dump.academy/keksobooking') {
             window.message.renderSuccessMessage();
@@ -26,16 +32,16 @@
             onSuccess(xhr.response);
           }
           break;
-        case 400:
+        case HTTP_BAD_REGUEST:
           error = 'Неверный запрос';
           break;
-        case 401:
+        case HTTP_UNAUTHORIZED:
           error = 'Пользователь не авторизован';
           break;
-        case 404:
+        case HTTP_NOT_FOUND:
           error = 'Ничего не найдено';
           break;
-        case 500:
+        case HTTP_INTERNAL_ERROR:
           error = 'Внутренняя ошибка сервера';
           break;
         default:
